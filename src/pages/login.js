@@ -18,5 +18,9 @@ export default function Login() {
     document.title = 'Login — Instagram';
   }, []);
 
-  return <p>I am the login page</p>;
+  return (
+    <div className="container">
+      <p>I have no idea</p>
+    </div>
+  );
 }
