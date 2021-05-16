@@ -49,6 +49,7 @@ export default function Login() {
               placeholder="Email address"
               className="focus:outline-none focus:border-blue-medium text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 rounded mb-2 border border-gray-primary "
               onChange={({ target }) => setEmail(target.value)}
+              value={email}
             />
             <input
               type="password"
@@ -56,6 +57,7 @@ export default function Login() {
               placeholder="Password"
               className="focus:outline-none focus:border-blue-medium text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 rounded mb-2 border border-gray-primary"
               onChange={({ target }) => setPassword(target.value)}
+              value={password}
             />
             <button
               disabled={isInvalid}
@@ -71,7 +73,7 @@ export default function Login() {
         <div className="flex justify-center items-center flex-col w-full rounded bg-white p-4 border border-gray-primary">
           <p className="text-s">
             Don't have an account?{` `}
-            <Link to="/signup" className="font-bold text-blue-medium">
+            <Link to={ROUTES.SIGN_UP} className="font-bold text-blue-medium">
               Sign Up
             </Link>
           </p>
