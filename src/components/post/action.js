@@ -25,7 +25,6 @@ export default function Actions({ docId, totalLikes, likedPhoto, handleFocus }) 
     setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1));
   };
 
-  // setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1));
   return (
     <>
       <div className="flex justify-between p-4">
