@@ -13,10 +13,10 @@ export default function Profile() {
 
   useEffect(() => {
     async function checkUserExists() {
-      const user = await getUserByUserName(username); // [user]
+      const [user] = await getUserByUserName(username); // [user]
 
-      if (user.length > 0) {
-        setUser(user[0]); // userid
+      if (user?.userId) {
+        setUser(user); // userid
         //  setUserExists(true);
       } else {
         //    setUserExists(false);
