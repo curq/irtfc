@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 import FirebaseContext from '../context/firebase';
 import UserContext from '../context/user';
+import { DEFAULT_IMAGE_PATH } from '../constants/paths';
 
 export default function Header() {
   const { firebase } = useContext(FirebaseContext);
@@ -69,18 +70,21 @@ export default function Header() {
                 </button>
 
                 <div className="flex items-center cursor-pointer">
-                  <Link to={`/p/${user?.displayName}`}>
+                  <Link to={`/p/${user?.displayName}`} aria-label={`${user?.displayName} profile`}>
                     <img
                       className="rounded-full h-8 w-8 flex"
                       src={`/images/avatars/${user?.displayName}.jpg`}
                       alt={`${user?.displayName} profile`}
+                      onError={(e) => {
+                        e.target.src = DEFAULT_IMAGE_PATH;
+                      }}
                     />
                   </Link>
                 </div>
               </>
             ) : (
               <>
-                <Link to={ROUTES.LOGIN}>
+                <Link to={ROUTES.LOGIN} aria-label="Login">
                   <button
                     type="button"
                     className="bg-blue-medium font-bold text-sm rounded text-white w-20 h-8"
@@ -88,7 +92,7 @@ export default function Header() {
                     Log In
                   </button>
                 </Link>
-                <Link to={ROUTES.SIGN_UP}>
+                <Link to={ROUTES.SIGN_UP} aria-label="Signup">
                   <button
                     type="button"
                     className="font-bold text-sm rounded text-blue-medium w-20 h-8"

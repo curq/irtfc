@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
 import { updateLoggedInUserFollowing, updateFollowedUserFollowers } from '../../services/firebase';
 
 export default function SuggestedProfile({
@@ -25,9 +26,12 @@ export default function SuggestedProfile({
         <img
           className="rounded-full w-8 flex mr-3"
           src={`/images/avatars/${username}.jpg`}
-          alt=""
+          alt={`${username} avatar`}
+          onError={(e) => {
+            e.target.src = DEFAULT_IMAGE_PATH;
+          }}
         />
-        <Link to={`/p/${username}`}>
+        <Link to={`/p/${username}`} aria-label={`${username} profile`}>
           <p className="text-sm font-bold">{username}</p>
         </Link>
       </div>

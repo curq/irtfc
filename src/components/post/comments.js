@@ -26,7 +26,7 @@ export default function Comments({ docId, comments: allComments, posted, comment
         )}
         {comments.slice(0, showAllComments ? comments.length : 3).map((item) => (
           <p key={`${item.comment}-${item.displayName}`} className="mb-1">
-            <Link to={`/p/${item.displayName}`}>
+            <Link to={`/p/${item.displayName}`} aria-label={`${item?.displayName} profile`}>
               <span className="mr-1 font-bold">{item.displayName}</span>
             </Link>
             <span>{item.comment}</span>

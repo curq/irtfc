@@ -73,7 +73,7 @@ export default function Login() {
         <div className="flex justify-center items-center flex-col w-full rounded bg-white p-4 border border-gray-primary">
           <p className="text-s">
             Don't have an account?{` `}
-            <Link to={ROUTES.SIGN_UP} className="font-bold text-blue-medium">
+            <Link to={ROUTES.SIGN_UP} className="font-bold text-blue-medium" aria-label="Signup">
               Sign Up
             </Link>
           </p>
