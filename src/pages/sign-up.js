@@ -47,6 +47,7 @@ export default function Signup() {
         setError(error.message);
       }
     } else {
+      setUsername('');
       setError('The username is taken, please try another.');
     }
   };
@@ -80,7 +81,7 @@ export default function Signup() {
             <input
               type="text"
               aria-label="Enter your full name"
-              placeholder="Full Name"
+              placeholder="Full name"
               className="focus:outline-none focus:border-blue-medium text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 rounded mb-2 border border-gray-primary "
               onChange={({ target }) => setFullname(target.value)}
               value={fullname}
