@@ -4,6 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 
 export default function Photos({ photos }) {
   const n = 12;
+  // render 12 skeleton elements while loading, photos if there is any or 'No Posts Yet' if there is none
   return (
     <div className="h-16 border-t border-gray-primary mt-12 pt-4">
       <div className="grid grid-cols-3 gap-8 mt-4 mb-12">

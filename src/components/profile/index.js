@@ -8,7 +8,7 @@ export default function UserProfile({ user }) {
   const reducer = (state, newState) => ({ ...state, ...newState });
   const initialState = {
     profile: {},
-    photosCollection: undefined,
+    photosCollection: undefined, // is undefined for the loading animation to work
     followerCount: 0
   };
 
@@ -19,6 +19,7 @@ export default function UserProfile({ user }) {
 
   useEffect(() => {
     async function getProfileInfoAndPhotos() {
+      // get the user photos and update the state
       const photos = await getUserPhotosByUserId(user.userId);
       dispatch({ profile: user, photosCollection: photos, followerCount: user.followers.length });
     }
@@ -27,6 +28,7 @@ export default function UserProfile({ user }) {
     }
   }, [user]);
 
+  // profile consists of header with general user data and photos posted by users
   return (
     <>
       <Header

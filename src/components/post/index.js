@@ -7,9 +7,10 @@ import Footer from './footer';
 import Comments from './comments';
 
 export default function Post({ content }) {
-  const commentInput = useRef(null);
+  const commentInput = useRef(null); // used to navigate to comment input field when comment icon is clicked
   const handleFocus = () => commentInput.current.focus();
 
+  // every post consists of Header, Image, Action buttons, Footer and Comments
   return (
     <div className="rounded col-span-4 border bg-white border-gray-primary mb-12">
       <Header username={content.username} />

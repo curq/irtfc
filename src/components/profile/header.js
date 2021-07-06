@@ -19,10 +19,10 @@ export default function Header({
     username: profileUsername
   }
 }) {
-  const { user: loggedInUser } = useContext(UserContext);
-  const { user } = useUser(loggedInUser?.uid);
+  const { user: loggedInUser } = useContext(UserContext); // get the current user from the context
+  const { user } = useUser(loggedInUser?.uid); // gets the user data if logged in, else gets falsy user
   const [isFollowingProfile, setIsFollowingProfile] = useState(false);
-  const activeBtnFollow = user?.username && user.username !== profileUsername;
+  const activeBtnFollow = user?.username && user.username !== profileUsername; // show follow|unfollow button if user is logged in
 
   const handleToggleFollow = async () => {
     setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
@@ -30,7 +30,7 @@ export default function Header({
       followerCount: isFollowingProfile ? followerCount - 1 : followerCount + 1
     });
 
-    await toggleFollow(isFollowingProfile, user.docId, profileUserId, profileDocId, user.userId);
+    await toggleFollow(isFollowingProfile, user.docId, profileUserId, profileDocId, user.userId); // toggles following and updates both the following user and the user that is followed
   };
 
   useEffect(() => {

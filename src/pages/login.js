@@ -18,7 +18,7 @@ export default function Login() {
 
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
-      history.push(ROUTES.DASHBOARD);
+      history.push(ROUTES.DASHBOARD); // after succesfully sign in redirect the user to the dashboard
     } catch (error) {
       setEmail('');
       setPassword('');

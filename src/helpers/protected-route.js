@@ -9,10 +9,12 @@ export default function ProtectedRoute({ user, children, ...rest }) {
       {...rest}
       render={({ location }) => {
         if (user) {
+          // if user is logged in, proceed to the page
           return React.cloneElement(children, { user });
         }
 
         if (!user) {
+          // if user is not logged, redirect to the dashboard
           return (
             <Redirect
               to={{

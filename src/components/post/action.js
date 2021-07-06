@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import FirebaseContext from '../../context/firebase';
 import UserContext from '../../context/user';
 
+// renders action buttons (like and comment)
 export default function Actions({ docId, totalLikes, likedPhoto, handleFocus }) {
   const {
     user: { uid: userId = '' }
@@ -12,6 +13,7 @@ export default function Actions({ docId, totalLikes, likedPhoto, handleFocus }) 
   const { firebase, FieldValue } = useContext(FirebaseContext);
 
   const handleToggleLiked = async () => {
+    // toggles like action and updates firestore database accordingly
     setToggleLiked((toggleLiked) => !toggleLiked);
 
     await firebase
@@ -22,7 +24,7 @@ export default function Actions({ docId, totalLikes, likedPhoto, handleFocus }) 
         likes: toggleLiked ? FieldValue.arrayRemove(userId) : FieldValue.arrayUnion(userId)
       });
 
-    setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1));
+    setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1)); // updates number of likes
   };
 
   return (
@@ -40,6 +42,7 @@ export default function Actions({ docId, totalLikes, likedPhoto, handleFocus }) 
             stroke="currentColor"
             tabIndex={0}
             className={`w-8 mr-4 select-none cursor-pointer focus:outline-none ${
+              // conditionally color the like icon
               toggleLiked ? 'fill-red text-red-primary' : 'text-black-light'
             }`}
           >

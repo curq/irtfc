@@ -9,6 +9,8 @@ export default function Timeline() {
   const { user } = useContext(LoggedInUserContext);
   const { photos } = usePhotos(user);
 
+  // if api call to get photos is still in process, do skeleton loading animation
+  // then if got any photos render the posts, else encourage to follow people
   return (
     <div className="container col-span-3 md:col-span-2">
       {!photos ? (

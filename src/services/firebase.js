@@ -18,8 +18,8 @@ export async function getUserByUserName(username) {
     .get();
 
   return result.docs.map((item) => ({
-    ...item.data(),
-    docId: item.id
+    ...item.data(), // spread the array returned by .data() method -> get all data
+    docId: item.id // docId is used to easily access and edit firestore document in other functions
   }));
 }
 
@@ -43,8 +43,6 @@ export async function getSuggestedProfiles(userId, following) {
     .filter((profile) => profile.userId !== userId && !following.includes(profile.userId));
 }
 
-// updateLoggedInUserFollowing, updateFollowedUserFollowers
-
 export async function updateLoggedInUserFollowing(
   loggedInUserDocId, // logged in user that will follow
   profileId, // the user that is requested to follow
@@ -55,7 +53,7 @@ export async function updateLoggedInUserFollowing(
     .collection('users')
     .doc(loggedInUserDocId)
     .update({
-      following: isFollowing ? FieldValue.arrayRemove(profileId) : FieldValue.arrayUnion(profileId)
+      following: isFollowing ? FieldValue.arrayRemove(profileId) : FieldValue.arrayUnion(profileId) // if user was already following -> stop following | else -> start following
     });
 }
 
@@ -70,12 +68,13 @@ export async function updateFollowedUserFollowers(
     .doc(profileDocId)
     .update({
       followers: isFollowing
-        ? FieldValue.arrayRemove(loggedInUserDocId)
-        : FieldValue.arrayUnion(loggedInUserDocId)
+        ? FieldValue.arrayRemove(loggedInUserDocId) // if logged user was following the given user before -> remove logged user from followers
+        : FieldValue.arrayUnion(loggedInUserDocId) // else add the logged user to followers list
     });
 }
 
 export async function getPhotos(userId, following) {
+  // get the photos of all the users that logged in user is currently following
   const result = await firebase
     .firestore()
     .collection('photos')
@@ -88,12 +87,13 @@ export async function getPhotos(userId, following) {
   }));
 
   const photosWithUserDetails = await Promise.all(
+    // get all the details of each photo for the post components (likes, comments, did the user liked the photo?)
     userFollowedPhotos.map(async (photo) => {
       let userLikedPhoto = false;
       if (photo.likes.includes(userId)) userLikedPhoto = true;
 
-      const user = await getUserByUserId(photo.userId);
-      const { username } = user[0];
+      const user = await getUserByUserId(photo.userId); // returns one element array with user object [{user}]
+      const { username } = user[0]; // get username of user that posted the photo
 
       return { username, ...photo, userLikedPhoto };
     })
@@ -102,15 +102,7 @@ export async function getPhotos(userId, following) {
 }
 
 export async function getUserPhotosByUserId(userId) {
-  // getUserPhotosByUserName(username)
-  // const [user] = await getUserByUserName(username);
-  /*
-const result = await firebase
-    .firestore()
-    .collection('photos')
-    .where('userId', '==', user.userId)
-    .get();
-*/
+  // get all photos (with data) of user wtih the given id
   const result = await firebase
     .firestore()
     .collection('photos')
@@ -124,11 +116,12 @@ const result = await firebase
 }
 
 export async function isUserFollowingProfile(loggedInUserUsername, profileUserId) {
+  // check if logged user is following the given profile
   const result = await firebase
     .firestore()
     .collection('users')
-    .where('username', '==', loggedInUserUsername)
-    .where('following', 'array-contains', profileUserId)
+    .where('username', '==', loggedInUserUsername) // get the user data by username
+    .where('following', 'array-contains', profileUserId) // match profileUserId with Ids in the following array
     .get();
 
   const [response = {}] = result.docs.map((item) => ({

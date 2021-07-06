@@ -11,6 +11,7 @@ export default function AddComment({ docId, comments, setComments, commentInput 
   } = useContext(UserContext);
 
   const handleSubmitComment = (event) => {
+    // update the comment list and push the changes to the firestore database
     event.preventDefault();
 
     setComments([...comments, { displayName, comment }]);

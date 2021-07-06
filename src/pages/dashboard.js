@@ -6,11 +6,14 @@ import Timeline from '../components/timeline';
 import useUser from '../hooks/use-user';
 import LoggedInUserContext from '../context/logged-in-user';
 
-export default function Dashboard({ user: loggedInUser }) {
+export default function Dashboard({
+  user: loggedInUser // we get the user from the protected route -> which gets it from the user context, so if we got here, user is definetely logged in
+}) {
   const { user } = useUser(loggedInUser.uid);
   useEffect(() => {
     document.title = 'Instagram';
   }, []);
+
   return (
     <LoggedInUserContext.Provider value={{ user }}>
       <div className="bg-gray-background">

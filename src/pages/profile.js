@@ -7,19 +7,17 @@ import UserProfile from '../components/profile';
 
 export default function Profile() {
   const { username } = useParams();
-  // const [userExists, setUserExists] = useState(false);
   const [user, setUser] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
     async function checkUserExists() {
-      const [user] = await getUserByUserName(username); // [user]
+      // if user exists, proceed further with passing down the data, else redirect to 404
+      const [user] = await getUserByUserName(username);
 
       if (user?.userId) {
-        setUser(user); // userid
-        //  setUserExists(true);
+        setUser(user);
       } else {
-        //    setUserExists(false);
         history.push(ROUTES.NOT_FOUND);
       }
     }

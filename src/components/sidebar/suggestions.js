@@ -10,7 +10,7 @@ export default function Suggestions({ userId, following, loggedInUserDocId }) {
 
   useEffect(() => {
     async function suggestedProfiles() {
-      const response = await getSuggestedProfiles(userId, following);
+      const response = await getSuggestedProfiles(userId, following); // get profiles that user is not following
       setProfiles(response);
     }
 

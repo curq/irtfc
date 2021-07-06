@@ -39,7 +39,7 @@ export default function Signup() {
           dateCreated: Date.now()
         });
 
-        history.push(ROUTES.DASHBOARD);
+        history.push(ROUTES.DASHBOARD); // Redirect the user to the dashboard after successful registration
       } catch (error) {
         setFullname('');
         setEmail('');

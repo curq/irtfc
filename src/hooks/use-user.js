@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { getUserByUserId } from '../services/firebase';
 
 export default function useUser(userId) {
+  // hook to get the user data
   const [activeUser, setActiveUser] = useState({});
 
   useEffect(() => {
