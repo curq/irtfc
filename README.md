@@ -30,7 +30,7 @@ This application (Instagram clone) was built using React (Custom Hooks, Context)
 
 ## :dvd: Demo
 
-[Link to demo](http://instagram-nsuser7.vercel.app/). You can use credentials listeb below to login or create your own account.
+[Link to demo](http://instagram-nsuser7.vercel.app/). You can use credentials listed below to login or create your own account.
 
 | login                | password   |
 | -------------------- | ---------- |
