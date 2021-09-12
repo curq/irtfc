@@ -34,5 +34,5 @@ This application (Instagram clone) was built using React (Custom Hooks, Context)
 
 | login                | password   |
 | -------------------- | ---------- |
-| adminadmin@gmail.com | adminadmin |
+| admin@gmail.com | adminadmin |
 
